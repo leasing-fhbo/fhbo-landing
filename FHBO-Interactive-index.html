@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FHBO | Future of Real Estate Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #F6F6F4;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at top, #1F2328 0%, #0a0a0a 50%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(201, 161, 74, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(201, 161, 74, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 40% 20%, rgba(201, 161, 74, 0.06) 0%, transparent 25%);
+            animation: drift 20s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(-5%, 5%); }
+            66% { transform: translate(5%, -5%); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(31, 35, 40, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 161, 74, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-header:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-svg-small {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 10px rgba(201, 161, 74, 0.5));
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(201, 161, 74, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(201, 161, 74, 0.8)); }
+        }
+
+        .logo-header:hover .logo-svg-small {
+            animation: spin 0.6s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #F6F6F4;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(201, 161, 74, 0.3);
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: #C9A14A;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+        }
+
+        nav {
+            background: rgba(42, 47, 54, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 161, 74, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .main-nav, .secondary-nav {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .main-nav a, .secondary-nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: rgba(246, 246, 244, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-nav a::before, .secondary-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 161, 74, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .main-nav a:hover::before, .secondary-nav a:hover::before {
+            left: 100%;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: #C9A14A;
+            border-bottom-color: #C9A14A;
+            text-shadow: 0 0 10px rgba(201, 161, 74, 0.5);
+        }
+
+        .secondary-nav a:hover {
+            color: #C9A14A;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(201, 161, 74, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: expand 4s ease-in-out infinite;
+        }
+
+        @keyframes expand {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0 0 30px rgba(201, 161, 74, 0.6));
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.6s ease;
+        }
+
+        .hero-logo.unlocked {
+            filter: drop-shadow(0 0 50px rgba(201, 161, 74, 1));
+        }
+
+        .hero-logo .key-icon {
+            transform-origin: 100px 60px;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hero-logo.unlocked .key-icon {
+            transform: rotate(90deg);
+        }
+
+        .hero-logo .door-element {
+            transform-origin: 90px 60px;
+            transition: transform 0.8s ease 0.4s;
+        }
+
+        .hero-logo.unlocked .door-element {
+            transform: perspective(400px) rotateY(-85deg);
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #C9A14A;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #F6F6F4 0%, #C9A14A 50%, #F6F6F4 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            color: rgba(246, 246, 244, 0.8);
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #C9A14A 0%, #b89440 100%);
+            color: #1F2328;
+            box-shadow: 0 10px 40px rgba(201, 161, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(201, 161, 74, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(246, 246, 244, 0.05);
+            color: #F6F6F4;
+            border: 2px solid rgba(201, 161, 74, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 161, 74, 0.2);
+            border-color: #C9A14A;
+            transform: translateY(-4px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #F6F6F4;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #C9A14A, transparent);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(246, 246, 244, 0.6);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .service-card {
+            background: rgba(31, 35, 40, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 161, 74, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 161, 74, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #C9A14A;
+            box-shadow: 0 20px 60px rgba(201, 161, 74, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #C9A14A;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: rgba(246, 246, 244, 0.8);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        .product-card {
+            background: rgba(31, 35, 40, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 161, 74, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 161, 74, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .product-card:hover::after {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #C9A14A;
+            box-shadow: 0 20px 60px rgba(201, 161, 74, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(201, 161, 74, 0.1) 0%, rgba(31, 35, 40, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: #F6F6F4;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #C9A14A;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(201, 161, 74, 0.5);
+        }
+
+        /* Bullet List */
+        .bullet-list {
+            background: rgba(31, 35, 40, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border-left: 4px solid #C9A14A;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .bullet-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            color: rgba(246, 246, 244, 0.9);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .bullet-list li:hover {
+            color: #C9A14A;
+            transform: translateX(10px);
+        }
+
+        .bullet-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: #C9A14A;
+            font-size: 1.5rem;
+            animation: flicker 2s ease-in-out infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .contact-info {
+            background: rgba(31, 35, 40, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 161, 74, 0.2);
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #C9A14A;
+        }
+
+        .contact-item {
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-item span:first-child {
+            font-size: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #C9A14A;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: rgba(31, 35, 40, 0.6);
+            border: 2px solid rgba(201, 161, 74, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #F6F6F4;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #C9A14A;
+            box-shadow: 0 0 20px rgba(201, 161, 74, 0.3);
+            background: rgba(31, 35, 40, 0.8);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(31, 35, 40, 0.8);
+            backdrop-filter: blur(20px);
+            color: rgba(246, 246, 244, 0.8);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201, 161, 74, 0.2);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(201, 161, 74, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #C9A14A;
+            border-radius: 50%;
+            animation: scroll 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 32px; opacity: 0; }
+        }
+
+        .scroll-indicator:hover {
+            border-color: #C9A14A;
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .main-nav, .secondary-nav {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="content-wrapper">
+        <header>
+            <div class="header-content">
+                <div class="logo-header">
+                    <svg class="logo-svg-small" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="60" r="35" fill="none" stroke="#C9A14A" stroke-width="8"/>
+                        <rect x="90" y="50" width="20" height="20" fill="#1F2328" rx="2"/>
+                        <rect x="96" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                        <rect x="70" y="125" width="60" height="8" fill="#C9A14A" rx="2"/>
+                        <rect x="70" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                        <rect x="122" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                        <circle cx="100" cy="60" r="8" fill="#F6F6F4"/>
+                    </svg>
+                    <div class="logo-text">
+                        <div class="logo-main">FHBO</div>
+                        <div class="logo-sub">Forever Home by Omorfia</div>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <div class="nav-container">
+                    <ul class="main-nav">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#corporate-housing" class="nav-link">Corporate Housing</a></li>
+                        <li><a href="#property-operations" class="nav-link">Property Operations</a></li>
+                        <li><a href="#about" class="nav-link">About FHBO</a></li>
+                        </ul>
+                    <ul class="secondary-nav">
+                        <li><a href="#shop-decor" class="nav-link">Shop Décor</a></li>
+                        <li><a href="#staging-products" class="nav-link">Staging Services</a></li>
+                        <li><a href="#virtual-staging-form" class="nav-link">Virtual Staging Form</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                     
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- HOME SECTION -->
+        <section id="home" class="content-page">
+            <div class="hero">
+                <div class="particles" id="particles"></div>
+                <div class="hero-content">
+                    <div class="hero-logo-container">
+                        <svg class="hero-logo" id="heroLogo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <g class="key-icon">
+                                <circle cx="100" cy="60" r="35" fill="none" stroke="#C9A14A" stroke-width="8"/>
+                                <rect class="door-element" x="90" y="50" width="20" height="20" fill="#1F2328" rx="2"/>
+                                <rect x="96" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                                <rect x="70" y="125" width="60" height="8" fill="#C9A14A" rx="2"/>
+                                <rect x="70" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                                <rect x="122" y="95" width="8" height="70" fill="#C9A14A" rx="2"/>
+                                <rect x="88" y="165" width="8" height="10" fill="#C9A14A" rx="1"/>
+                                <rect x="104" y="165" width="8" height="15" fill="#C9A14A" rx="1"/>
+                                <circle cx="100" cy="60" r="8" fill="#F6F6F4"/>
+                            </g>
+                        </svg>
+                        <div style="margin-top: 1rem; color: rgba(201, 161, 74, 0.8); font-size: 0.9rem; font-style: italic;">Click the key to unlock</div>
+                    </div>
+                    <h1>Real Estate Operations + Design + Field Service</h1>
+                    <p>Arizona-based company focused on long-term residential stability through corporate housing, property operations, and curated interior solutions</p>
+                    <div class="cta-buttons">
+                        <a href="#corporate-housing" class="btn btn-primary nav-link"><span>Explore Corporate Housing</span></a>
+                        <a href="#shop-decor" class="btn btn-secondary nav-link"><span>Shop Décor Collection</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator"></div>
+
+            <div class="content-section">
+                <h2 class="section-title">Your Gateway to Permanence</h2>
+                <p class="section-subtitle">From corporate leasing to interior design, we provide comprehensive support for modern residential operations</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🏢</div>
+                        <h3>Corporate Housing</h3>
+                        <p>Long-term corporate leasing solutions with 24-48 month terms, professionally maintained properties, and EIN-based business leasing for operational continuity.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Property Operations</h3>
+                        <p>Comprehensive field service including property coordination, vendor management, staging logistics, and ongoing maintenance for company properties.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">✨</div>
+                        <h3>Design & Staging</h3>
+                        <p>Curated home décor and professional staging services to enhance property appeal for homeowners, investors, and landlords.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORPORATE HOUSING SECTION -->
+        <section id="corporate-housing" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Corporate Housing & Long-Term Leasing</h2>
+                <p class="section-subtitle">Professional residential solutions for business stability and operational continuity</p>
+                
+                <div style="max-width: 900px; margin: 3rem auto; line-height: 1.9; font-size: 1.15rem; color: rgba(246, 246, 244, 0.8);">
+                    <p style="margin-bottom: 1.5rem;">FHBO provides long-term corporate housing solutions for business stability, operational continuity, and future property acquisition planning.</p>
+                    
+                    <p style="margin-bottom: 1.5rem;">We lease residential properties under our Arizona LLC for multi-year occupancy, offering owners reduced vacancy, professional care, and predictable payments.</p>
+                </div>
+
+                <div class="bullet-list">
+                    <ul>
+                        <li>24–48 month lease terms</li>
+                        <li>No subleasing or short-term rentals</li>
+                        <li>Professionally maintained homes</li>
+                        <li>EIN-based corporate leasing</li>
+                        <li>Prepaid rent options available</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#contact" class="btn btn-primary nav-link"><span>Contact Us About Corporate Leasing</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROPERTY OPERATIONS SECTION -->
+        <section id="property-operations" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Property Operations & Real Estate Support</h2>
+                <p class="section-subtitle">Comprehensive field service and property coordination for company assets</p>
+                
+                <div style="max-width: 900px; margin: 3rem auto; line-height: 1.9; font-size: 1.15rem; color: rgba(246, 246, 244, 0.8);">
+                    <p style="margin-bottom: 1.5rem;">FHBO supports internal property operations including housing coordination, property visits, vendor coordination, staging logistics, and long-term residential planning.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; font-weight: 600; color: #C9A14A;">Services are provided for company-leased or company-owned properties only.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>Property Coordination</h3>
+                        <p>Comprehensive oversight of property logistics, scheduling, and operational planning for company housing assets.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔍</div>
+                        <h3>Site Visits & Inspections</h3>
+                        <p>Regular property assessments, condition monitoring, and documentation for maintenance and operational needs.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🤝</div>
+                        <h3>Vendor Management</h3>
+                        <p>Coordination with contractors, service providers, and maintenance teams to ensure property standards are maintained.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Staging Logistics</h3>
+                        <p>Interior staging coordination, furniture placement, and design implementation for property enhancement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">About FHBO</h2>
+                <p class="section-subtitle">Building long-term residential stability through integrated operations</p>
+                
+                <div style="max-width: 900px; margin: 3rem auto;">
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 1.5rem;">Who We Are</h3>
+                    <p style="line-height: 1.9; font-size: 1.15rem; color: rgba(246, 246, 244, 0.8); margin-bottom: 3rem;">Forever Home by Omorfia LLC (FHBO) is an Arizona-based company focused on long-term residential stability through corporate housing, property operations, and future land acquisition planning.</p>
+                    
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 1.5rem;">What We Do</h3>
+                    <div class="bullet-list">
+                        <ul>
+                            <li>Corporate housing acquisition (internal use)</li>
+                            <li>Property coordination & planning</li>
+                            <li>Interior staging & décor solutions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(201, 161, 74, 0.1); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 4rem 0; text-align: center; border: 1px solid rgba(201, 161, 74, 0.3);">
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 1rem;">Our Mission</h3>
+                    <p style="font-size: 1.2rem; color: rgba(246, 246, 244, 0.8); max-width: 800px; margin: 0 auto; line-height: 1.8;">To provide integrated real estate solutions that combine professional corporate housing, comprehensive property operations, and thoughtful interior design for lasting residential value.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP DECOR SECTION -->
+        <section id="shop-decor" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Shop Décor Collection (COMING SOON)</h2>
+                <p class="section-subtitle">Curated home accessories to elevate any living space</p>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">🛋️</div>
+                        <div class="product-info">
+                            <h3>Designer Throw Pillows</h3>
+                            <p style="color: rgba(246, 246, 244, 0.7);">Premium textured pillows in modern patterns and neutral tones</p>
+                            <div class="product-price"> $$$ </div>
+                            <button class="btn btn-primary" style="width: 100%;"><span>COMING SOON</span></button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🕯️</div>
+                        <div class="product-info">
+                            <h3>Luxury Candles</h3>
+                            <p style="color: rgba(246, 246, 244, 0.7);">Hand-poured soy candles with sophisticated seasonal scents</p>
+                            <div class="product-price"> $$$ </div>
+                            <button class="btn btn-primary" style="width: 100%;"><span>COMING SOON</span></button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🧺</div>
+                        <div class="product-info">
+                            <h3>Cozy Blankets</h3>
+                            <p style="color: rgba(246, 246, 244, 0.7);">Ultra-soft throws in versatile colors perfect for layering</p>
+                            <div class="product-price"> $$$ </div>
+                            <button class="btn btn-primary" style="width: 100%;"><span>COMING SOON</span></button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">✨</div>
+                        <div class="product-info">
+                            <h3>Home Accessories</h3>
+                            <p style="color: rgba(246, 246, 244, 0.7);">Carefully selected décor pieces to complete your space</p>
+                            <div class="product-price"> $$$ </div>
+                            <button class="btn btn-primary" style="width: 100%;"><span>COMING SOON</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin-top: 4rem; text-align: center; border: 1px solid rgba(201, 161, 74, 0.2);">
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 2rem;">Shop Multiple Ways (COMING SOON)</h3>
+                    <div class="services-grid" style="margin-top: 2rem;">
+                        <div class="service-card">
+                            <div class="service-icon">🖥️</div>
+                            <h3>E-Commerce</h3>
+                            <p>Browse and purchase online anytime with convenient shipping options</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">🏪</div>
+                            <h3>Pop-Up Events</h3>
+                            <p>Experience products in person at our curated retail events</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">🏢</div>
+                            <h3>Design Centers</h3>
+                            <p>Available through select design center partnerships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGING PRODUCTS SECTION -->
+        <section id="staging-products" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Virtual & O-Staging Services</h2>
+                <p class="section-subtitle">Three distinctive staging solutions to bring your vision to life</p>
+                
+                <div style="max-width: 900px; margin: 3rem auto; line-height: 1.9; font-size: 1.15rem; color: rgba(246, 246, 244, 0.8); text-align: center;">
+                    <p style="margin-bottom: 1.5rem;">Transform empty spaces into captivating, buyer-ready homes with our innovative staging solutions designed for modern real estate.</p>
+                </div>
+
+                <!-- Virtual Staging -->
+                <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 3rem 0; border: 1px solid rgba(201, 161, 74, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="font-size: 4rem;">📸</div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h3 style="font-size: 2.2rem; color: #C9A14A; margin-bottom: 1rem;">Virtual Staging</h3>
+                            <p style="font-size: 1.1rem; color: rgba(246, 246, 244, 0.7); font-style: italic;">The best affordable option without the heavy lifting, all while socially distancing.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="color: rgba(246, 246, 244, 0.85); line-height: 1.8; margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1rem;">Have an unfurnished space or empty listing? Fill it with our Virtual Staging Service. Simply choose your design style, upload your room photos and we will artfully stage your listing to suit your home needs.</p>
+                    </div>
+
+                    <div class="bullet-list">
+                        <ul>
+                            <li>Choose your preferred design style</li>
+                            <li>Upload your room photos easily</li>
+                            <li>Photorealistic digital furniture placement</li>
+                            <li>Fast turnaround time</li>
+                            <li>No physical heavy lifting required</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="openVirtualStagingBtn"><span>Place an Order - Virtual Staging</span></button>
+                    </div>
+                </div>
+
+                <!-- Virtual Staging Form Modal -->
+                <div id="virtualStagingModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; overflow-y: auto; padding: 2rem;">
+                    <div style="max-width: 800px; margin: 2rem auto; background: rgba(31, 35, 40, 0.95); backdrop-filter: blur(20px); border-radius: 24px; padding: 3rem; border: 2px solid rgba(201, 161, 74, 0.3); box-shadow: 0 20px 80px rgba(201, 161, 74, 0.4); position: relative;">
+                        
+                        <button id="closeModalBtn" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(201, 161, 74, 0.2); border: 2px solid rgba(201, 161, 74, 0.5); color: #C9A14A; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">×</button>
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="font-size: 3.5rem; margin-bottom: 1rem;">📸</div>
+                            <h2 style="font-size: 2.5rem; color: #C9A14A; margin-bottom: 0.5rem;">Virtual Staging Form</h2>
+                            <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Tell us a little bit about yourself</p>
+                        </div>
+
+                        <form id="virtualStagingForm" style="display: flex; flex-direction: column; gap: 2rem;">
+                            
+                            <!-- Personal Information Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem;">Your Information</h3>
+                                
+                                <div class="form-group">
+                                    <label for="vs-fullname">Full Name <span style="color: #C9A14A;">*</span></label>
+                                    <input type="text" id="vs-fullname" name="fullname" required placeholder="Enter your full name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vs-email">Email Address <span style="color: #C9A14A;">*</span></label>
+                                    <input type="email" id="vs-email" name="email" required placeholder="your.email@example.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vs-phone">Phone Number <span style="color: #C9A14A;">*</span></label>
+                                    <input type="tel" id="vs-phone" name="phone" required placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+
+                            <!-- Design Style Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem;">Design Preferences</h3>
+                                
+                                <div class="form-group">
+                                    <label for="vs-style">My Design Style is... <span style="color: #C9A14A;">*</span></label>
+                                    <select id="vs-style" name="designStyle" required style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer; transition: all 0.3s ease;">
+                                        <option value="" disabled selected>Choose your interior design style</option>
+                                        <option value="modern">Modern - Clean lines and minimalist aesthetics</option>
+                                        <option value="contemporary">Contemporary - Current trends and sleek designs</option>
+                                        <option value="traditional">Traditional - Classic and timeless elegance</option>
+                                        <option value="transitional">Transitional - Blend of traditional and modern</option>
+                                        <option value="scandinavian">Scandinavian - Light, airy, and functional</option>
+                                        <option value="industrial">Industrial - Raw materials and urban edge</option>
+                                        <option value="bohemian">Bohemian - Eclectic and artistic vibes</option>
+                                        <option value="midcentury">Mid-Century Modern - Retro 1950s-60s style</option>
+                                        <option value="coastal">Coastal - Beach-inspired and relaxed</option>
+                                        <option value="farmhouse">Farmhouse - Rustic and cozy charm</option>
+                                        <option value="luxury">Luxury - High-end and sophisticated</option>
+                                        <option value="minimalist">Minimalist - Less is more approach</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vs-rooms">Number of Rooms to Stage</label>
+                                    <select id="vs-rooms" name="roomCount" style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer;">
+                                        <option value="1">1 Room</option>
+                                        <option value="2">2 Rooms</option>
+                                        <option value="3">3 Rooms</option>
+                                        <option value="4">4 Rooms</option>
+                                        <option value="5">5+ Rooms</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Image Upload Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem;">Upload Your Room Photos</h3>
+                                
+                                <div class="form-group">
+                                    <label for="vs-images">Select Images <span style="color: #C9A14A;">*</span></label>
+                                    <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">Upload photos of the rooms you'd like staged. Accepted formats: JPG, PNG, HEIC. Max 10 images.</p>
+                                    
+                                    <div style="position: relative;">
+                                        <input type="file" id="vs-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelect(event)">
+                                        <label for="vs-images" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                                            <span style="font-size: 3rem; margin-bottom: 1rem;">📁</span>
+                                            <span style="color: #C9A14A; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;">Click to upload images</span>
+                                            <span style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem;">or drag and drop files here</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div id="file-list" style="margin-top: 1rem; display: none;">
+                                        <p style="color: #C9A14A; font-weight: 600; margin-bottom: 0.5rem;">Selected Files:</p>
+                                        <ul id="file-names" style="list-style: none; padding: 0;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Notes Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem;">Additional Information</h3>
+                                
+                                <div class="form-group">
+                                    <label for="vs-notes">Special Requests or Notes</label>
+                                    <textarea id="vs-notes" name="notes" placeholder="Tell us about any specific requirements, preferences, or details about your space..." style="min-height: 120px;"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.3rem 3rem;"><span>Submit Virtual Staging Request</span></button>
+                                <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-top: 1rem;">We'll review your request and be in contact soon</p>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                    <!-- O-Staging -->
+                <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 3rem 0; border: 1px solid rgba(201, 161, 74, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="font-size: 4rem;">🎨</div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h3 style="font-size: 2.2rem; color: #C9A14A; margin-bottom: 1rem;">O-Staging</h3>
+                            <p style="font-size: 1.1rem; color: rgba(246, 246, 244, 0.7); font-style: italic;">Also referred to as Omorfia Staging</p>
+                        </div>
+                    </div>
+                    
+                    <div style="color: rgba(246, 246, 244, 0.85); line-height: 1.8; margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1rem;">Looking for a more personal experience with a quick turnaround time? Choose our O-Staging service.</p>
+                        <p style="margin-bottom: 1rem;">Provide us with your desired room photos and we will provide you with our creative design board(s) tailored to your style using Forever Home products and our affiliated vendors that ship directly to you to bring your vision to life.</p>
+                        <p style="font-size: 1.3rem; color: #C9A14A; font-weight: 600; margin-top: 1.5rem; font-style: italic;">Invigorate the inner designer in you. You can do it...We believe in You!</p>
+                    </div>
+
+                    <div class="bullet-list">
+                        <ul>
+                            <li>Personalized design consultation</li>
+                            <li>Custom design boards tailored to your style</li>
+                            <li>Forever Home products featured</li>
+                            <li>Affiliated vendor partnerships</li>
+                            <li>Direct shipping to your location</li>
+                            <li>Quick turnaround time</li>
+                        </ul>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary"><span>(COMING SOON) O-Staging</span></button>
+                    </div>
+                </div>
+
+                <!-- Soft Staging -->
+                <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 3rem 0; border: 1px solid rgba(201, 161, 74, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="font-size: 4rem;">✨</div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h3 style="font-size: 2.2rem; color: #C9A14A; margin-bottom: 1rem;">Soft Staging</h3>
+                            <p style="font-size: 1.1rem; color: rgba(246, 246, 244, 0.7); font-style: italic;">Staging with Accessories & Vignettes</p>
+                        </div>
+                    </div>
+                    
+                    <div style="color: rgba(246, 246, 244, 0.85); line-height: 1.8; margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1rem;">Enhance your space with carefully curated accessories and vignettes that add warmth and character to any room.</p>
+                        <p style="font-weight: 600; color: #C9A14A;">Available for rent or purchase directly via Forever Home.</p>
+                    </div>
+
+                    <div class="bullet-list">
+                        <ul>
+                            <li>Curated accessories and décor pieces</li>
+                            <li>Professional vignette arrangements</li>
+                            <li>Flexible rental or purchase options</li>
+                            <li>Quick installation and setup</li>
+                            <li>Perfect for final touches</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary"><span> (COMING SOON) Rent Soft Staging</span></button>
+                        <a href="#shop-decor" class="btn btn-secondary nav-link"><span> (COMING SOON) Purchase Products</span></a>
+                    </div>
+                </div>
+
+                <!-- Comparison Section -->
+                <div style="background: linear-gradient(135deg, rgba(201, 161, 74, 0.15) 0%, rgba(201, 161, 74, 0.05) 100%); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 4rem 0; text-align: center; border: 1px solid rgba(201, 161, 74, 0.3);">
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 2rem;">Which Staging Solution is Right for You?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                            <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">Virtual Staging</h4>
+                            <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">Best for empty listings needing quick digital transformation</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">💎</div>
+                            <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">O-Staging</h4>
+                            <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">Ideal for DIY enthusiasts wanting professional guidance</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🌟</div>
+                            <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">Soft Staging</h4>
+                            <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">Perfect for adding finishing touches to furnished spaces</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#contact" class="btn btn-secondary nav-link"><span>Need Help Choosing? Contact Us</span></a>
+                </div>
+            </div>
+        </section>
+
+            <!-- VIRTUAL STAGING FORM PAGE -->
+        <section id="virtual-staging-form" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Virtual Staging Request Form</h2>
+                <p class="section-subtitle">Let's transform your space with professional virtual staging</p>
+
+                <div style="max-width: 1000px; margin: 0 auto;">
+                    
+                    <!-- Form Container -->
+                    <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); border-radius: 24px; padding: 3rem; border: 2px solid rgba(201, 161, 74, 0.3); box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);">
+                        
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">📸</div>
+                            <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 0.5rem;">Tell us a little bit about yourself</h3>
+                            <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Fill out the form below and upload your room photos to get started</p>
+                        </div>
+
+                        <form id="virtualStagingFormPage" style="display: flex; flex-direction: column; gap: 2rem;">
+                            
+                            <!-- Personal Information Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 2rem;">👤</span>
+                                    Your Information
+                                </h3>
+                                
+                                <div class="form-group">
+                                    <label for="vsf-fullname">Full Name <span style="color: #C9A14A;">*</span></label>
+                                    <input type="text" id="vsf-fullname" name="fullname" required placeholder="Enter your full name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vsf-email">Email Address <span style="color: #C9A14A;">*</span></label>
+                                    <input type="email" id="vsf-email" name="email" required placeholder="your.email@example.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vsf-phone">Phone Number <span style="color: #C9A14A;">*</span></label>
+                                    <input type="tel" id="vsf-phone" name="phone" required placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+
+                            <!-- Property Information -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 2rem;">🏠</span>
+                                    Property Details
+                                </h3>
+                                
+                                <div class="form-group">
+                                    <label for="vsf-address">Property Address (Optional)</label>
+                                    <input type="text" id="vsf-address" name="address" placeholder="123 Main Street, Phoenix, AZ">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vsf-property-type">Property Type</label>
+                                    <select id="vsf-property-type" name="propertyType" style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer;">
+                                        <option value="single-family">Single Family Home</option>
+                                        <option value="condo">Condo/Townhouse</option>
+                                        <option value="apartment">Apartment</option>
+                                        <option value="commercial">Commercial Space</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Design Style Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 2rem;">🎨</span>
+                                    Choose an Interior Design Style for your property
+                                </h3>
+                                
+                                <div class="form-group">
+                                    <label for="vsf-style">My Design Style is... <span style="color: #C9A14A;">*</span></label>
+                                    <select id="vsf-style" name="designStyle" required style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer; transition: all 0.3s ease;">
+                                        <option value="" disabled selected>Choose your interior design style</option>
+                                        <option value="modern">Modern - Clean lines and minimalist aesthetics</option>
+                                        <option value="contemporary">Contemporary - Current trends and sleek designs</option>
+                                        <option value="traditional">Traditional - Classic and timeless elegance</option>
+                                        <option value="transitional">Transitional - Blend of traditional and modern</option>
+                                        <option value="scandinavian">Scandinavian - Light, airy, and functional</option>
+                                        <option value="industrial">Industrial - Raw materials and urban edge</option>
+                                        <option value="bohemian">Bohemian - Eclectic and artistic vibes</option>
+                                        <option value="midcentury">Mid-Century Modern - Retro 1950s-60s style</option>
+                                        <option value="coastal">Coastal - Beach-inspired and relaxed</option>
+                                        <option value="farmhouse">Farmhouse - Rustic and cozy charm</option>
+                                        <option value="luxury">Luxury - High-end and sophisticated</option>
+                                        <option value="minimalist">Minimalist - Less is more approach</option>
+                                    </select>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                                    <div class="form-group">
+                                        <label for="vsf-rooms">Number of Rooms to Stage</label>
+                                        <select id="vsf-rooms" name="roomCount" style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer;">
+                                            <option value="1">1 Room</option>
+                                            <option value="2">2 Rooms</option>
+                                            <option value="3">3 Rooms</option>
+                                            <option value="4">4 Rooms</option>
+                                            <option value="5">5+ Rooms</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="vsf-timeline">Timeline</label>
+                                        <select id="vsf-timeline" name="timeline" style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer;">
+                                            <option value="asap">ASAP</option>
+                                            <option value="1-week">Within 1 week</option>
+                                            <option value="2-weeks">Within 2 weeks</option>
+                                            <option value="flexible">Flexible</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Image Upload Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 2rem;">📁</span>
+                                    Upload Your Room Photos
+                                </h3>
+                                
+                                <div class="form-group">
+                                    <label for="vsf-images">Select Images <span style="color: #C9A14A;">*</span></label>
+                                    <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">Upload photos of the rooms you'd like staged. Accepted formats: JPG, PNG, HEIC. Max 10 images.</p>
+                                    
+                                    <div style="position: relative;">
+                                        <input type="file" id="vsf-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelectPage(event)">
+                                        <label for="vsf-images" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                                            <span style="font-size: 4rem; margin-bottom: 1rem;">📁</span>
+                                            <span style="color: #C9A14A; font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5rem;">Click to upload images</span>
+                                            <span style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem;">or drag and drop files here</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div id="file-list-page" style="margin-top: 1rem; display: none;">
+                                        <p style="color: #C9A14A; font-weight: 600; margin-bottom: 0.5rem;">Selected Files:</p>
+                                        <ul id="file-names-page" style="list-style: none; padding: 0;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Notes Section -->
+                            <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 2rem;">📝</span>
+                                    Additional Information
+                                </h3>
+                                
+                                <div class="form-group">
+                                    <label for="vsf-notes">Special Requests or Notes</label>
+                                    <textarea id="vsf-notes" name="notes" placeholder="Tell us about any specific requirements, preferences, target audience, or details about your space..." style="min-height: 120px;"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="display: flex; align-items: center; gap: 1rem; cursor: pointer; color: rgba(246, 246, 244, 0.8);">
+                                        <input type="checkbox" id="vsf-newsletter" name="newsletter" style="width: 20px; height: 20px; cursor: pointer;">
+                                        <span>I'd like to receive updates about FHBO services and products</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <button type="submit" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.5rem 4rem;"><span>Submit Virtual Staging Request</span></button>
+                                <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-top: 1.5rem; line-height: 1.6;">
+                                    📞 We'll review your request and be in contact soon<br>
+                                    💎 Custom quote based on your specific needs
+                                </p>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Why Choose Virtual Staging -->
+                    <div style="margin-top: 4rem; text-align: center;">
+                        <h3 style="color: #C9A14A; font-size: 2rem; margin-bottom: 2rem;">Why Choose FHBO Virtual Staging?</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                            <div style="background: rgba(31, 35, 40, 0.4); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                                <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">Fast Turnaround</h4>
+                                <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">48-72 hour delivery on most projects</p>
+                            </div>
+                            <div style="background: rgba(31, 35, 40, 0.4); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                                <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">Affordable Pricing</h4>
+                                <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">Starting at $99 per room</p>
+                            </div>
+                            <div style="background: rgba(31, 35, 40, 0.4); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
+                                <h4 style="color: #C9A14A; margin-bottom: 0.5rem;">Photorealistic Results</h4>
+                                <p style="color: rgba(246, 246, 244, 0.7); font-size: 0.95rem;">Professional quality that sells</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+          <!-- CONTACT SECTION -->
+        <section id="contact" class="content-page section-hidden">
+            <div class="content-section">
+                <h2 class="section-title">Contact FHBO</h2>
+                <p class="section-subtitle">Let's discuss how we can support your residential needs</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get In Touch</h3>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <div>
+                                <strong style="color: #C9A14A;">Location</strong><br>
+                                <span style="color: rgba(246, 246, 244, 0.8);">Arizona</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <div>
+                                <strong style="color: #C9A14A;">Email</strong><br>
+                                <span style="color: rgba(246, 246, 244, 0.8);">Leasing@fhbo.net</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span>🏢</span>
+                            <div>
+                                <strong style="color: #C9A14A;">Business Type</strong><br>
+                                <span style="color: rgba(246, 246, 244, 0.8);">Arizona LLC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">I'm Interested In</label>
+                            <input type="text" id="interest" name="interest" placeholder="e.g., Corporate Housing, Staging, Décor">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><span>Send Message</span></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2021 Forever Home by Omorfia LLC (FHBO). All rights reserved.</p>
+            <p style="color: rgba(246, 246, 244, 0.6);">Arizona-based real estate operations, design, and field service company.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Interactive Key & Door Animation
+        const heroLogo = document.getElementById('heroLogo');
+        let isUnlocked = false;
+
+        heroLogo.addEventListener('click', function() {
+            isUnlocked = !isUnlocked;
+            if (isUnlocked) {
+                this.classList.add('unlocked');
+                // Create unlock effect particles
+                createUnlockEffect();
+            } else {
+                this.classList.remove('unlocked');
+            }
+        });
+
+        function createUnlockEffect() {
+            const container = document.querySelector('.hero-logo-container');
+            for (let i = 0; i < 20; i++) {
+                const spark = document.createElement('div');
+                spark.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: #C9A14A;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    pointer-events: none;
+                    animation: sparkBurst 0.8s ease-out forwards;
+                `;
+                spark.style.setProperty('--angle', Math.random() * 360 + 'deg');
+                spark.style.setProperty('--distance', 50 + Math.random() * 50 + 'px');
+                spark.style.animationDelay = Math.random() * 0.2 + 's';
+                container.appendChild(spark);
+                
+                setTimeout(() => spark.remove(), 1000);
+            }
+        }
+
+        // Add spark animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkBurst {
+                0% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0);
+                    opacity: 1;
+                    scale: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance));
+                    opacity: 0;
+                    scale: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Particle generation
+        const particlesContainer = document.getElementById('particles');
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 3000);
+        }
+        
+        setInterval(createParticle, 200);
+
+        // Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.content-page');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                sections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.remove('section-hidden');
+                    } else {
+                        section.classList.add('section-hidden');
+                    }
+                });
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Hide scroll indicator on non-home pages
+                if (targetId === 'home') {
+                    scrollIndicator.style.display = 'block';
+                } else {
+                    scrollIndicator.style.display = 'none';
+                }
+            });
+        });
+
+        // Scroll indicator click
+        scrollIndicator.addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Create success message
+            const form = e.target;
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = `
+                background: linear-gradient(135deg, #C9A14A 0%, #b89440 100%);
+                color: #1F2328;
+                padding: 1.5rem;
+                border-radius: 12px;
+                text-align: center;
+                font-weight: 600;
+                margin-top: 1rem;
+                animation: slideIn 0.5s ease;
+            `;
+            successMsg.textContent = '✓ Thank you! We will be in contact soon.';
+            
+            form.appendChild(successMsg);
+            form.reset();
+            
+            setTimeout(() => successMsg.remove(), 5000);
+        });
+
+        // Add hover sound effect simulation (visual feedback)
+        document.querySelectorAll('.service-card, .product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight);
+            }
+        });
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const openBtn = document.getElementById("openVirtualStagingBtn");
+    const modal = document.getElementById("virtualStagingModal");
+    const closeBtn = document.getElementById("closeModalBtn");
+
+    if (!openBtn || !modal || !closeBtn) {
+        console.error("Virtual staging modal elements missing");
+        return;
+    }
+
+    openBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    });
+
+    modal.addEventListener("click", e => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    });
+});
+    </script>
+</body>
+</html>
