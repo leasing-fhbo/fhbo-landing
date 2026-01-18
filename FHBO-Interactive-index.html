@@ -807,13 +807,13 @@
                         <li><a href="#corporate-housing" class="nav-link">Corporate Housing</a></li>
                         <li><a href="#property-operations" class="nav-link">Property Operations</a></li>
                         <li><a href="#about" class="nav-link">About FHBO</a></li>
-                        </ul>
+                        
+                    </ul>
                     <ul class="secondary-nav">
                         <li><a href="#shop-decor" class="nav-link">Shop Décor</a></li>
-                        <li><a href="#staging-products" class="nav-link">Staging Services</a></li>
+                        <li><a href="#staging-products" class="nav-link">Staging Products</a></li>
                         <li><a href="#virtual-staging-form" class="nav-link">Virtual Staging Form</a></li>
                         <li><a href="#contact" class="nav-link">Contact</a></li>
-                     
                     </ul>
                 </div>
             </nav>
@@ -884,7 +884,7 @@
                 <div style="max-width: 900px; margin: 3rem auto; line-height: 1.9; font-size: 1.15rem; color: rgba(246, 246, 244, 0.8);">
                     <p style="margin-bottom: 1.5rem;">FHBO provides long-term corporate housing solutions for business stability, operational continuity, and future property acquisition planning.</p>
                     
-                    <p style="margin-bottom: 1.5rem;">We lease residential properties under our Arizona LLC for multi-year occupancy, offering owners reduced vacancy, professional care, and predictable payments.</p>
+                    <p style="margin-bottom: 1.5rem;">We acquire residential property leases under our Arizona LLC for multi-year occupancy, offering owners reduced vacancy, professional care, and predictable payments.</p>
                 </div>
 
                 <div class="bullet-list">
@@ -970,7 +970,7 @@
         <!-- SHOP DECOR SECTION -->
         <section id="shop-decor" class="content-page section-hidden">
             <div class="content-section">
-                <h2 class="section-title">Shop Décor Collection (COMING SOON)</h2>
+                <h2 class="section-title">Shop Décor Collection</h2>
                 <p class="section-subtitle">Curated home accessories to elevate any living space</p>
                 
                 <div class="product-grid">
@@ -1013,7 +1013,7 @@
                 </div>
 
                 <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin-top: 4rem; text-align: center; border: 1px solid rgba(201, 161, 74, 0.2);">
-                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 2rem;">Shop Multiple Ways (COMING SOON)</h3>
+                    <h3 style="font-size: 2rem; color: #C9A14A; margin-bottom: 2rem;">Shop Multiple Ways-COMING SOON</h3>
                     <div class="services-grid" style="margin-top: 2rem;">
                         <div class="service-card">
                             <div class="service-icon">🖥️</div>
@@ -1085,8 +1085,11 @@
                             <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Tell us a little bit about yourself</p>
                         </div>
 
-                        <form id="virtualStagingForm" style="display: flex; flex-direction: column; gap: 2rem;">
-                            
+                        <form id="virtualStagingForm" action="https://formspree.io/f/xreepbgk" method="POST" style="display: flex; flex-direction: column; gap: 2rem;">
+                           
+                         <input type="hidden" name="_subject" value="Virtual Staging Request - Modal Form">
+                            <input type="hidden" name="_redirect" value="https://fhbo.net/">
+
                             <!-- Personal Information Section -->
                             <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
                                 <h3 style="color: #C9A14A; margin-bottom: 1.5rem; font-size: 1.5rem;">Your Information</h3>
@@ -1115,18 +1118,20 @@
                                     <label for="vs-style">My Design Style is... <span style="color: #C9A14A;">*</span></label>
                                     <select id="vs-style" name="designStyle" required style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer; transition: all 0.3s ease;">
                                         <option value="" disabled selected>Choose your interior design style</option>
-                                        <option value="modern">Modern - Clean lines and minimalist aesthetics</option>
-                                        <option value="contemporary">Contemporary - Current trends and sleek designs</option>
-                                        <option value="traditional">Traditional - Classic and timeless elegance</option>
-                                        <option value="transitional">Transitional - Blend of traditional and modern</option>
-                                        <option value="scandinavian">Scandinavian - Light, airy, and functional</option>
-                                        <option value="industrial">Industrial - Raw materials and urban edge</option>
-                                        <option value="bohemian">Bohemian - Eclectic and artistic vibes</option>
-                                        <option value="midcentury">Mid-Century Modern - Retro 1950s-60s style</option>
-                                        <option value="coastal">Coastal - Beach-inspired and relaxed</option>
-                                        <option value="farmhouse">Farmhouse - Rustic and cozy charm</option>
-                                        <option value="luxury">Luxury - High-end and sophisticated</option>
-                                        <option value="minimalist">Minimalist - Less is more approach</option>
+                                        <option value="Modern Farmhouse">Modern Farmhouse - Contemporary lines and cozy charm</option>
+                                        <option value="Scandinavian">Scandinavian - Light, airy, and functional</option>
+                                        <option value="Coastal">Coastal - Beach-inspired and relaxed</option>
+                                        <option value="Traditional">Traditional - Classic and timeless elegance</option>
+                                        <option value="Hollywood Glam">Hollywood Glam - High-end, bold and sophisticated</option>
+                                        <option value="Modern">Modern - Clean lines and minimalist aesthetics</option>
+                                        <option value="Contemporary">Contemporary - Current trends and sleek designs</option>
+                                        <option value="Minimalist">Minimalist - Less is more approach</option>
+                                        <option value="Shabby-Chic">Shabby-Chic - Vintage and elegance</option>
+                                        <option value="Farmhouse">Farmhouse - Rustic and cozy charm</option>
+                                        <option value="French Country">French Country - Warm, rustic elegance and charm</option>
+                                        <option value="Mid-Century Modern">Mid-Century Modern - Retro 1950s-60s style</option>
+                                        <option value="Industrial">Industrial - Raw materials and urban edge</option>
+                                        <option value="Bohemian">Bohemian - Eclectic and artistic vibes</option>
                                     </select>
                                 </div>
 
@@ -1138,6 +1143,7 @@
                                         <option value="3">3 Rooms</option>
                                         <option value="4">4 Rooms</option>
                                         <option value="5">5+ Rooms</option>
+                                        <option value="6">6+ Rooms</option>
                                     </select>
                                 </div>
                             </div>
@@ -1179,14 +1185,14 @@
                             <!-- Submit Button -->
                             <div style="text-align: center; margin-top: 1rem;">
                                 <button type="submit" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.3rem 3rem;"><span>Submit Virtual Staging Request</span></button>
-                                <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-top: 1rem;">We'll review your request and be in contact soon</p>
+                                <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-top: 1rem;">We'll review your request and contact you within 24 hours</p>
                             </div>
 
                         </form>
                     </div>
                 </div>
-
-                    <!-- O-Staging -->
+              
+                <!-- O-Staging -->
                 <div style="background: rgba(31, 35, 40, 0.6); backdrop-filter: blur(10px); padding: 3rem; border-radius: 20px; margin: 3rem 0; border: 1px solid rgba(201, 161, 74, 0.3);">
                     <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
                         <div style="font-size: 4rem;">🎨</div>
@@ -1214,7 +1220,7 @@
                     </div>
 
                     <div style="text-align: center; margin-top: 2rem;">
-                        <button class="btn btn-primary"><span>(COMING SOON) O-Staging</span></button>
+                        <button class="btn btn-primary"><span>(COMING SOON) - O-Staging</span></button>
                     </div>
                 </div>
 
@@ -1245,7 +1251,7 @@
 
                     <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
                         <button class="btn btn-primary"><span> (COMING SOON) Rent Soft Staging</span></button>
-                        <a href="#shop-decor" class="btn btn-secondary nav-link"><span> (COMING SOON) Purchase Products</span></a>
+                        <a href="#shop-decor" class="btn btn-secondary nav-link"><span>(COMING SOON) Purchase Products</span></a>
                     </div>
                 </div>
 
@@ -1277,7 +1283,7 @@
             </div>
         </section>
 
-            <!-- VIRTUAL STAGING FORM PAGE -->
+          <!-- VIRTUAL STAGING FORM PAGE -->
         <section id="virtual-staging-form" class="content-page section-hidden">
             <div class="content-section">
                 <h2 class="section-title">Virtual Staging Request Form</h2>
@@ -1294,7 +1300,10 @@
                             <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Fill out the form below and upload your room photos to get started</p>
                         </div>
 
-                        <form id="virtualStagingFormPage" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <form id="virtualStagingFormPage" action="https://formspree.io/f/xreepbgk" method="POST" style="display: flex; flex-direction: column; gap: 2rem;">
+                            
+                             <input type="hidden" name="_subject" value="Virtual Staging Request - Full Form">
+                            <input type="hidden" name="_redirect" value="https://fhbo.net/">
                             
                             <!-- Personal Information Section -->
                             <div style="background: rgba(201, 161, 74, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(201, 161, 74, 0.2);">
@@ -1354,18 +1363,20 @@
                                     <label for="vsf-style">My Design Style is... <span style="color: #C9A14A;">*</span></label>
                                     <select id="vsf-style" name="designStyle" required style="padding: 1rem; background: rgba(31, 35, 40, 0.6); border: 2px solid rgba(201, 161, 74, 0.3); border-radius: 12px; font-size: 1rem; color: #F6F6F4; width: 100%; cursor: pointer; transition: all 0.3s ease;">
                                         <option value="" disabled selected>Choose your interior design style</option>
-                                        <option value="modern">Modern - Clean lines and minimalist aesthetics</option>
-                                        <option value="contemporary">Contemporary - Current trends and sleek designs</option>
-                                        <option value="traditional">Traditional - Classic and timeless elegance</option>
-                                        <option value="transitional">Transitional - Blend of traditional and modern</option>
-                                        <option value="scandinavian">Scandinavian - Light, airy, and functional</option>
-                                        <option value="industrial">Industrial - Raw materials and urban edge</option>
-                                        <option value="bohemian">Bohemian - Eclectic and artistic vibes</option>
-                                        <option value="midcentury">Mid-Century Modern - Retro 1950s-60s style</option>
-                                        <option value="coastal">Coastal - Beach-inspired and relaxed</option>
-                                        <option value="farmhouse">Farmhouse - Rustic and cozy charm</option>
-                                        <option value="luxury">Luxury - High-end and sophisticated</option>
-                                        <option value="minimalist">Minimalist - Less is more approach</option>
+                                        <option value="Modern Farmhouse">Modern Farmhouse - Contemporary lines and cozy charm</option>
+                                        <option value="Scandinavian">Scandinavian - Light, airy, and functional</option>
+                                        <option value="Coastal">Coastal - Beach-inspired and relaxed</option>
+                                        <option value="Traditional">Traditional - Classic and timeless elegance</option>
+                                        <option value="Hollywood Glam">Hollywood Glam - High-end, bold and sophisticated</option>
+                                        <option value="Modern">Modern - Clean lines and minimalist aesthetics</option>
+                                        <option value="Contemporary">Contemporary - Current trends and sleek designs</option>
+                                        <option value="Minimalist">Minimalist - Less is more approach</option>
+                                        <option value="Shabby-Chic">Shabby-Chic - Vintage and elegance</option>
+                                        <option value="Farmhouse">Farmhouse - Rustic and cozy charm</option>
+                                        <option value="French Country">French Country - Warm, rustic elegance and charm</option>
+                                        <option value="Mid-Century Modern">Mid-Century Modern - Retro 1950s-60s style</option>
+                                        <option value="Industrial">Industrial - Raw materials and urban edge</option>
+                                        <option value="Bohemian">Bohemian - Eclectic and artistic vibes</option>
                                     </select>
                                 </div>
 
@@ -1478,7 +1489,7 @@
             </div>
         </section>
 
-          <!-- CONTACT SECTION -->
+                <!-- CONTACT SECTION -->
         <section id="contact" class="content-page section-hidden">
             <div class="content-section">
                 <h2 class="section-title">Contact FHBO</h2>
@@ -1498,7 +1509,7 @@
                             <span>📧</span>
                             <div>
                                 <strong style="color: #C9A14A;">Email</strong><br>
-                                <span style="color: rgba(246, 246, 244, 0.8);">Leasing@fhbo.net</span>
+                                <a href="mailto:leasing@fhbo.net" style="color: rgba(246, 246, 244, 0.8); text-decoration: none; transition: color 0.3s ease;">leasing@fhbo.net</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1510,7 +1521,7 @@
                         </div>
                     </div>
 
-                    <form class="contact-form">
+                    <form class="contact-form" action="https://formspree.io/f/xreepbgk" method="POST">
                         <div class="form-group">
                             <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1527,6 +1538,8 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required></textarea>
                         </div>
+                        <input type="hidden" name="_subject" value="FHBO Contact Form Submission">
+                        <input type="hidden" name="_redirect" value="https://fhbo.net/">
                         <button type="submit" class="btn btn-primary" style="width: 100%;"><span>Send Message</span></button>
                     </form>
                 </div>
@@ -1652,29 +1665,39 @@
         });
 
         // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Create success message
-            const form = e.target;
-            const successMsg = document.createElement('div');
-            successMsg.style.cssText = `
-                background: linear-gradient(135deg, #C9A14A 0%, #b89440 100%);
-                color: #1F2328;
-                padding: 1.5rem;
-                border-radius: 12px;
-                text-align: center;
-                font-weight: 600;
-                margin-top: 1rem;
-                animation: slideIn 0.5s ease;
-            `;
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                // Let Formspree handle the submission
+                // Show success message after form is processed
+                setTimeout(() => {
+                    const successMsg = document.createElement('div');
+                    successMsg.style.cssText = `
+                        background: linear-gradient(135deg, #C9A14A 0%, #b89440 100%);
+                        color: #1F2328;
+                        padding: 1.5rem;
+                        border-radius: 12px;
+                        text-align: center;
+                        font-weight: 600;
+                        margin-top: 1rem;
+                        animation: slideIn 0.5s ease;
+                    `;
             successMsg.textContent = '✓ Thank you! We will be in contact soon.';
-            
-            form.appendChild(successMsg);
-            form.reset();
-            
-            setTimeout(() => successMsg.remove(), 5000);
-        });
+            if (response.ok) {
+  form.reset();
+  successMsg.style.display = "block";
+  errorMsg.style.display = "none";
+
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 2500);
+}
+
+           contactForm.appendChild(successMsg);
+                    setTimeout(() => successMsg.remove(), 5000);
+                }, 100);
+            });
+        }
 
         // Add hover sound effect simulation (visual feedback)
         document.querySelectorAll('.service-card, .product-card').forEach(card => {
