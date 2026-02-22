@@ -1241,7 +1241,8 @@
                             <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Tell us a little bit about yourself</p>
                         </div>
 
-                        <form id="virtualStagingForm" action="https://formspree.io/f/xreepbgk" method="POST" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <form id="virtualStagingForm" action="https://formspree.io/f/xreepbgk" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 2rem;">
+                            <input type="hidden" name="_to" value="leasing@fhbo.net">
                            
                          <input type="hidden" name="_subject" value="Virtual Staging Request - Modal Form">
                             <input type="hidden" name="_redirect" value="https://fhbo.net/">
@@ -1314,17 +1315,26 @@
                                     <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">Upload photos of the rooms you'd like staged. Accepted formats: JPG, PNG, HEIC. Max 10 images.</p>
                                     
                                     <div style="position: relative;">
-                                        <input type="file" id="vs-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelect(event)">
-                                        <label for="vs-images" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                            <span style="font-size: 3rem; margin-bottom: 1rem;">📁</span>
+                                        <input type="file" id="vs-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelect(event, 'vs')">
+                                        <label for="vs-images" id="vs-dropzone" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                                            <span id="vs-dropzone-icon" style="font-size: 3rem; margin-bottom: 1rem;">📁</span>
                                             <span style="color: #C9A14A; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;">Click to upload images</span>
                                             <span style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem;">or drag and drop files here</span>
                                         </label>
                                     </div>
-                                    
-                                    <div id="file-list" style="margin-top: 1rem; display: none;">
-                                        <p style="color: #C9A14A; font-weight: 600; margin-bottom: 0.5rem;">Selected Files:</p>
-                                        <ul id="file-names" style="list-style: none; padding: 0;"></ul>
+
+                                    <!-- Upload Status Bar (modal) -->
+                                    <div id="vs-upload-status" style="display:none; margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 10px; background: rgba(31,35,40,0.8); border: 1px solid rgba(201,161,74,0.3);">
+                                        <div id="vs-upload-progress-wrap" style="display:none; margin-bottom: 0.75rem;">
+                                            <div style="display:flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                                                <span style="color:rgba(246,246,244,0.7); font-size:0.85rem;">Attaching files…</span>
+                                                <span id="vs-upload-pct" style="color:#C9A14A; font-size:0.85rem; font-weight:600;">0%</span>
+                                            </div>
+                                            <div style="background:rgba(201,161,74,0.15); border-radius:6px; height:6px; overflow:hidden;">
+                                                <div id="vs-upload-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#C9A14A,#f0c96a); border-radius:6px; transition: width 0.2s ease;"></div>
+                                            </div>
+                                        </div>
+                                        <ul id="vs-file-names" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem;"></ul>
                                     </div>
                                 </div>
                             </div>
@@ -1471,7 +1481,8 @@
                             <p style="color: rgba(246, 246, 244, 0.7); font-size: 1.1rem;">Fill out the form below and upload your room photos to get started</p>
                         </div>
 
-                        <form id="virtualStagingFormPage" action="https://formspree.io/f/xreepbgk" method="POST" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <form id="virtualStagingFormPage" action="https://formspree.io/f/xreepbgk" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 2rem;">
+                            <input type="hidden" name="_to" value="leasing@fhbo.net">
                             
                              <input type="hidden" name="_subject" value="Virtual Staging Request - Full Form">
                             <input type="hidden" name="_redirect" value="https://fhbo.net/">
@@ -1588,17 +1599,26 @@
                                     <p style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">Upload photos of the rooms you'd like staged. Accepted formats: JPG, PNG, HEIC. Max 10 images.</p>
                                     
                                     <div style="position: relative;">
-                                        <input type="file" id="vsf-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelectPage(event)">
-                                        <label for="vsf-images" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                                            <span style="font-size: 4rem; margin-bottom: 1rem;">📁</span>
+                                        <input type="file" id="vsf-images" name="images" accept="image/*" multiple required style="display: none;" onchange="handleFileSelect(event, 'vsf')">
+                                        <label for="vsf-images" id="vsf-dropzone" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(31, 35, 40, 0.6); border: 2px dashed rgba(201, 161, 74, 0.5); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center;">
+                                            <span id="vsf-dropzone-icon" style="font-size: 4rem; margin-bottom: 1rem;">📁</span>
                                             <span style="color: #C9A14A; font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5rem;">Click to upload images</span>
                                             <span style="color: rgba(246, 246, 244, 0.6); font-size: 0.9rem;">or drag and drop files here</span>
                                         </label>
                                     </div>
-                                    
-                                    <div id="file-list-page" style="margin-top: 1rem; display: none;">
-                                        <p style="color: #C9A14A; font-weight: 600; margin-bottom: 0.5rem;">Selected Files:</p>
-                                        <ul id="file-names-page" style="list-style: none; padding: 0;"></ul>
+
+                                    <!-- Upload Status Bar (page) -->
+                                    <div id="vsf-upload-status" style="display:none; margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 10px; background: rgba(31,35,40,0.8); border: 1px solid rgba(201,161,74,0.3);">
+                                        <div id="vsf-upload-progress-wrap" style="display:none; margin-bottom: 0.75rem;">
+                                            <div style="display:flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                                                <span style="color:rgba(246,246,244,0.7); font-size:0.85rem;">Attaching files…</span>
+                                                <span id="vsf-upload-pct" style="color:#C9A14A; font-size:0.85rem; font-weight:600;">0%</span>
+                                            </div>
+                                            <div style="background:rgba(201,161,74,0.15); border-radius:6px; height:6px; overflow:hidden;">
+                                                <div id="vsf-upload-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#C9A14A,#f0c96a); border-radius:6px; transition: width 0.2s ease;"></div>
+                                            </div>
+                                        </div>
+                                        <ul id="vsf-file-names" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem;"></ul>
                                     </div>
                                 </div>
                             </div>
@@ -1681,7 +1701,7 @@
                             <span>📧</span>
                             <div>
                                 <strong style="color: #C9A14A;">Email</strong><br>
-                                <a href="/cdn-cgi/l/email-protection#5a363f3b2933343d1a3c32383574343f2e" style="color: rgba(246, 246, 244, 0.8); text-decoration: none; transition: color 0.3s ease;"><span class="__cf_email__" data-cfemail="c3afa6a2b0aaada483a5aba1acedada6b7"><span class="__cf_email__" data-cfemail="d19db4b0a2b8bfb691b7b9b3beffbfb4a5">Leasing@fhbo.net</span></span></a>
+                                <a href="/cdn-cgi/l/email-protection#5a363f3b2933343d1a3c32383574343f2e" style="color: rgba(246, 246, 244, 0.8); text-decoration: none; transition: color 0.3s ease;"><span class="__cf_email__" data-cfemail="c3afa6a2b0aaada483a5aba1acedada6b7"><span class="__cf_email__" data-cfemail="d19db4b0a2b8bfb691b7b9b3beffbfb4a5"><span class="__cf_email__" data-cfemail="65290004160c0b0225030d070a4b0b0011">[email&#160;protected]</span></span></span></a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1724,7 +1744,7 @@
         </footer>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Interactive Key & Door Animation
         const heroLogo = document.getElementById('heroLogo');
         let isUnlocked = false;
@@ -1905,14 +1925,284 @@
     </script>
     <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const openBtn = document.getElementById("openVirtualStagingBtn");
-    const modal = document.getElementById("virtualStagingModal");
+    // ── Modal open / close ──────────────────────────────────────────────
+    const openBtn  = document.getElementById("openVirtualStagingBtn");
+    const modal    = document.getElementById("virtualStagingModal");
     const closeBtn = document.getElementById("closeModalBtn");
 
-    if (!openBtn || !modal || !closeBtn) {
-        console.error("Virtual staging modal elements missing");
-        return;
+    if (openBtn && modal) {
+        openBtn.addEventListener("click", () => {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        });
+    }
+    if (closeBtn && modal) {
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        });
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "";
+            }
+        });
     }
 
-    openBtn.addEventListener("click", () => {
-        modal.style.display
+    // ── Shared file-select handler for both forms ───────────────────────
+    // prefix = 'vs'  (modal)  or  'vsf'  (full-page form)
+    window.handleFileSelect = function(event, prefix) {
+        const files = Array.from(event.target.files);
+        if (!files.length) return;
+
+        const statusBox   = document.getElementById(prefix + '-upload-status');
+        const progressWrap= document.getElementById(prefix + '-upload-progress-wrap');
+        const bar         = document.getElementById(prefix + '-upload-bar');
+        const pct         = document.getElementById(prefix + '-upload-pct');
+        const list        = document.getElementById(prefix + '-file-names');
+        const dropzone    = document.getElementById(prefix + '-dropzone');
+        const icon        = document.getElementById(prefix + '-dropzone-icon');
+
+        // Show status panel immediately
+        statusBox.style.display   = 'block';
+        progressWrap.style.display = 'block';
+        list.innerHTML = '';
+
+        // Simulate file reading progress
+        let progress = 0;
+        const step = 100 / files.length;
+        let processed = 0;
+
+        files.forEach((file, i) => {
+            const reader = new FileReader();
+            reader.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const filePct = (e.loaded / e.total) * step;
+                    const total = Math.min(99, Math.round(i * step + filePct));
+                    bar.style.width = total + '%';
+                    pct.textContent = total + '%';
+                }
+            };
+            reader.onload = () => {
+                processed++;
+                progress = Math.round((processed / files.length) * 100);
+                bar.style.width = progress + '%';
+                pct.textContent = progress + '%';
+
+                // Build file row
+                const sizeKB = (file.size / 1024).toFixed(0);
+                const sizeTxt = file.size > 1048576
+                    ? (file.size / 1048576).toFixed(1) + ' MB'
+                    : sizeKB + ' KB';
+
+                const li = document.createElement('li');
+                li.style.cssText = `
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 0.6rem 0.9rem;
+                    background: rgba(201,161,74,0.08);
+                    border: 1px solid rgba(201,161,74,0.25);
+                    border-radius: 8px;
+                    animation: fadeSlideIn 0.3s ease;
+                `;
+                li.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="7 13 10 16 17 9"/>
+                    </svg>
+                    <span style="flex:1; color:#F6F6F4; font-size:0.88rem; word-break:break-all;">${file.name}</span>
+                    <span style="color:rgba(246,246,244,0.45); font-size:0.78rem; white-space:nowrap;">${sizeTxt}</span>
+                `;
+                list.appendChild(li);
+
+                // All done
+                if (processed === files.length) {
+                    setTimeout(() => {
+                        progressWrap.style.display = 'none';
+
+                        // Success banner
+                        const banner = document.createElement('div');
+                        const plural = files.length > 1 ? 'files' : 'file';
+                        banner.style.cssText = `
+                            display: flex;
+                            align-items: center;
+                            gap: 0.6rem;
+                            padding: 0.65rem 1rem;
+                            background: rgba(76,175,80,0.12);
+                            border: 1px solid rgba(76,175,80,0.4);
+                            border-radius: 8px;
+                            margin-bottom: 0.6rem;
+                            animation: fadeSlideIn 0.3s ease;
+                        `;
+                        banner.innerHTML = `
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="7 13 10 16 17 9"/>
+                            </svg>
+                            <span style="color:#4CAF50; font-weight:600; font-size:0.88rem;">
+                                ${files.length} ${plural} attached — ready to submit
+                            </span>
+                        `;
+                        statusBox.insertBefore(banner, list);
+
+                        // Update dropzone appearance
+                        dropzone.style.borderColor = 'rgba(76,175,80,0.6)';
+                        dropzone.style.background   = 'rgba(76,175,80,0.05)';
+                        icon.textContent = '✅';
+                    }, 300);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    };
+
+    // ── Drag-and-drop for both upload zones ─────────────────────────────
+    ['vs', 'vsf'].forEach(prefix => {
+        const dz    = document.getElementById(prefix + '-dropzone');
+        const input = document.getElementById(prefix + '-images');
+        if (!dz || !input) return;
+
+        dz.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dz.style.borderColor = '#C9A14A';
+            dz.style.background  = 'rgba(201,161,74,0.08)';
+        });
+        dz.addEventListener('dragleave', () => {
+            dz.style.borderColor = 'rgba(201,161,74,0.5)';
+            dz.style.background  = 'rgba(31,35,40,0.6)';
+        });
+        dz.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dz.style.borderColor = 'rgba(201,161,74,0.5)';
+            dz.style.background  = 'rgba(31,35,40,0.6)';
+            const dt = e.dataTransfer;
+            if (dt.files.length) {
+                // Manually assign files to the input so FormData picks them up
+                const dataTransfer = new DataTransfer();
+                Array.from(dt.files).forEach(f => dataTransfer.items.add(f));
+                input.files = dataTransfer.files;
+                handleFileSelect({ target: input }, prefix);
+            }
+        });
+    });
+
+    // ── Virtual staging form AJAX submission (modal + page) ─────────────
+    function bindVSForm(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalLabel = submitBtn.innerHTML;
+
+            // Disable & show spinner
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span style="display:flex;align-items:center;gap:0.5rem;justify-content:center;">⏳ Submitting…</span>';
+
+            try {
+                const formData = new FormData(form);
+
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    // Success state
+                    submitBtn.innerHTML = '<span style="display:flex;align-items:center;gap:0.5rem;justify-content:center;">✅ Submitted Successfully!</span>';
+                    submitBtn.style.background = 'linear-gradient(135deg,#4CAF50,#388E3C)';
+                    submitBtn.style.borderColor = '#4CAF50';
+
+                    const successBanner = document.createElement('div');
+                    successBanner.style.cssText = `
+                        margin-top: 1.5rem;
+                        padding: 1.5rem 2rem;
+                        background: rgba(76,175,80,0.1);
+                        border: 2px solid rgba(76,175,80,0.5);
+                        border-radius: 14px;
+                        text-align: center;
+                        animation: fadeSlideIn 0.4s ease;
+                    `;
+                    successBanner.innerHTML = `
+                        <div style="font-size:2.5rem;margin-bottom:0.5rem;">✅</div>
+                        <div style="color:#4CAF50;font-weight:700;font-size:1.2rem;margin-bottom:0.5rem;">Request Submitted!</div>
+                        <div style="color:rgba(246,246,244,0.75);font-size:0.95rem;">
+                            Your virtual staging request and photos have been sent to <strong style="color:#C9A14A;">leasing@fhbo.net</strong>.<br>
+                            We'll be in touch within 1–2 business days.
+                        </div>
+                    `;
+                    form.appendChild(successBanner);
+
+                    // Scroll success into view
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Reset after delay
+                    setTimeout(() => {
+                        form.reset();
+                        successBanner.remove();
+                        submitBtn.innerHTML = originalLabel;
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        submitBtn.style.borderColor = '';
+
+                        // Reset upload zones
+                        ['vs', 'vsf'].forEach(p => {
+                            const sz = document.getElementById(p + '-upload-status');
+                            const dz = document.getElementById(p + '-dropzone');
+                            const ic = document.getElementById(p + '-dropzone-icon');
+                            if (sz) sz.style.display = 'none';
+                            if (dz) { dz.style.borderColor='rgba(201,161,74,0.5)'; dz.style.background='rgba(31,35,40,0.6)'; }
+                            if (ic) ic.textContent = formId === 'virtualStagingForm' ? '📁' : '📁';
+                        });
+                    }, 6000);
+
+                } else {
+                    const data = await res.json().catch(() => ({}));
+                    throw new Error(data.error || 'Submission failed');
+                }
+
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalLabel;
+
+                const errBanner = document.createElement('div');
+                errBanner.style.cssText = `
+                    margin-top: 1rem;
+                    padding: 1rem 1.5rem;
+                    background: rgba(244,67,54,0.1);
+                    border: 1px solid rgba(244,67,54,0.4);
+                    border-radius: 10px;
+                    color: #ef9a9a;
+                    font-size: 0.95rem;
+                    text-align: center;
+                `;
+                errBanner.innerHTML = `⚠️ Something went wrong — please try again or email <a href="mailto:leasing@fhbo.net" style="color:#C9A14A;">leasing@fhbo.net</a> directly.`;
+                form.appendChild(errBanner);
+                setTimeout(() => errBanner.remove(), 8000);
+            }
+        });
+    }
+
+    bindVSForm('virtualStagingForm');
+    bindVSForm('virtualStagingFormPage');
+
+    // ── Inject fadeSlideIn keyframe once ────────────────────────────────
+    if (!document.getElementById('vs-keyframes')) {
+        const s = document.createElement('style');
+        s.id = 'vs-keyframes';
+        s.textContent = `
+            @keyframes fadeSlideIn {
+                from { opacity:0; transform:translateY(-6px); }
+                to   { opacity:1; transform:translateY(0); }
+            }
+        `;
+        document.head.appendChild(s);
+    }
+});
+    </script>
+</body>
+</html>
